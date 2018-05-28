@@ -1,0 +1,54 @@
+﻿
+
+
+
+/* Drop Tables */
+
+DROP TABLE switch_command CASCADE CONSTRAINTS;
+
+
+
+
+/* Create Tables */
+
+CREATE TABLE switch_command
+(
+	id nvarchar2(64) NOT NULL,
+	cmd_name varchar2(2000) NOT NULL,
+	cmd_type char(3),
+	cmd_result varchar2(100000),
+	switch_id varchar2(100),
+	-- 创建者
+	create_by varchar2(64),
+	-- 创建时间
+	create_date timestamp,
+	-- 更新者
+	update_by varchar2(64),
+	-- 更新时间
+	update_date timestamp,
+	-- 备注信息
+	remarks varchar2(255),
+	-- 删除标记（0：正常；1：删除）
+	del_flag char(1) DEFAULT '0' NOT NULL,
+	PRIMARY KEY (id)
+);
+
+
+
+create sequence command_seq nocycle maxvalue 9999999999 start with 1;
+
+
+/* Comments */
+
+COMMENT ON TABLE switch_command IS '交换机命令表';
+COMMENT ON COLUMN switch_command.id IS '命令ID';
+COMMENT ON COLUMN switch_command.cmd_name IS '交换机命令';
+COMMENT ON COLUMN switch_command.cmd_type IS '命令类型';
+COMMENT ON COLUMN switch_command.cmd_result IS '命令执行结果';
+COMMENT ON COLUMN switch_command.switch_id IS '对应交换机';
+COMMENT ON COLUMN switch_command.create_by IS '创建者';
+COMMENT ON COLUMN switch_command.create_date IS '创建时间';
+COMMENT ON COLUMN switch_command.update_by IS '更新者';
+COMMENT ON COLUMN switch_command.update_date IS '更新时间';
+COMMENT ON COLUMN switch_command.remarks IS '备注信息';
+COMMENT ON COLUMN switch_command.del_flag IS '删除标记';
